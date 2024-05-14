@@ -1,6 +1,6 @@
 package org.cuenta;
 
-public class cuenta {
+public abstract class cuenta {
 
     private float saldo;
     //Atributo que define el numero de consignaciones realizadas en una cuenta bancaria
@@ -11,7 +11,7 @@ public class cuenta {
     private int numeroderetiro=0;
     //Atributo que define la comision mensual que se cobrara a una cuenta bancaria
 
-    private float tasaanual=;
+    private float tasaanual=0;
     //Atributo que define la comision mensual que se cobra a una cuenta bancaria
 
     private float comisionmensual=0;
@@ -20,7 +20,7 @@ public class cuenta {
     * @parametro saldo que define el saldo de la cuenta
     * @parametro tasaanuela parametro que define la tasaanuel de interes de la cuenta */
 
-    public cuenta(float tasaanual, float comisionmensual) {
+    public cuenta(float cantidad, float tasaanual) {
         this.saldo=saldo;
         this.tasaanual=tasaanual;
 
@@ -31,7 +31,7 @@ public class cuenta {
     public void depositar (float cantidad){
         /*se actualiza el saldo con la cantidad depositada*/
 
-        saldo = saldo+cantidad;
+        saldo=saldo+cantidad;
 
         /*Actualizamos el numero de depositos realizadas a la cuenta*/
         numerodeconsignacion=numerodeconsignacion+1;
@@ -46,7 +46,7 @@ public class cuenta {
         /*Si la cantidad supera el saldo el retiro no se puede realizar*/
 
         if (nuevosaldo>=0){
-            saldo -= cantidad;
+            saldo-=cantidad;
             numeroderetiro=numeroderetiro+1;
 
         }
@@ -70,9 +70,19 @@ public class cuenta {
     }
 
     /*Metodo que genea un extracto aplicando al saldo actual una comisoon y calculano su interes*/
-    public void extractomensual (){
+    public void extractoMensual (){
         saldo-=comisionmensual;
         calcularinteres();
+    }
+
+    /*Imprimir los datos y resultados con los parametros
+    * saldo representando el saldo de la cuenta
+    * comision mensual representando la comision de la cuenta
+    * y el numero de transacciones realizadas*/
+    public void imprimir() {
+        System.out.println("Saldo: " + saldo);
+        System.out.println("Comisión mensual: " + comisionmensual);
+        System.out.println("Número de transacciones: " + (numerodeconsignacion + numeroderetiro));
     }
 
 }
